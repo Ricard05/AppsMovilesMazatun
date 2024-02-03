@@ -160,9 +160,9 @@ const Home = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         >
-          {Images2.map((image, i) => (
+          {Images2.map((image, j) => (
             <Image
-              key={image} // Assuming each image object has a unique ID
+              key={j + 1} // Assuming each image object has a unique ID
               style={styles.images}
               source={{ uri: image }}
             />

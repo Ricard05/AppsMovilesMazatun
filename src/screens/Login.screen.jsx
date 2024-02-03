@@ -3,17 +3,24 @@ import { Text, View, TouchableOpacity, Image, TextInput } from "react-native";
 
 export default function Loginscreen({ navigation }) {
   const goToLogin = () => {
-    if (email.length === 0 || password.length === 0) {
+    if (email === "" || password === "") {
       console.log("Completa los campos");
     } else {
       console.log("Iniciar Sesion");
+      setEmail("");
+      setPassword("");
       navigation.navigate("TabScreen");
     }
   };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const handleChangeEmail = (e) => {
+    setEmail(e.value);
+  };
+  const handleChangePassword = (e) => {
+    setPassword(e.value);
+  };
   return (
     <>
       <View
@@ -52,11 +59,13 @@ export default function Loginscreen({ navigation }) {
               borderRadius: 10,
               marginTop: 70,
             }}
+            onChange={handleChangeEmail}
           />
 
           <TextInput
             placeholder="Password"
             value={password}
+            onChange={handleChangePassword}
             style={{
               padding: 15,
               borderColor: "#352981",
