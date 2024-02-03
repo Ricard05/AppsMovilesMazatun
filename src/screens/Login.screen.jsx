@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, TouchableOpacity, Image, TextInput } from "react-native";
 
 export default function Loginscreen({ navigation }) {
   const goToLogin = () => {
-    navigation.navigate("TabScreen");
+    if (email.length === 0 || password.length === 0) {
+      console.log("Completa los campos");
+    } else {
+      console.log("Iniciar Sesion");
+      navigation.navigate("TabScreen");
+    }
   };
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <>
@@ -36,6 +44,7 @@ export default function Loginscreen({ navigation }) {
           <Text style={{ fontSize: 30 }}>Login</Text>
           <TextInput
             placeholder="Email"
+            value={email}
             style={{
               padding: 15,
               borderColor: "#352981",
@@ -47,6 +56,7 @@ export default function Loginscreen({ navigation }) {
 
           <TextInput
             placeholder="Password"
+            value={password}
             style={{
               padding: 15,
               borderColor: "#352981",

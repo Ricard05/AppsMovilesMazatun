@@ -128,7 +128,7 @@ const Home = () => {
             return index === currentIndex ? (
               imageGroup.map((imageSource, i) => (
                 <Image
-                  key={i}
+                  key={imageSource}
                   style={{
                     width: 200,
                     height: 200,
@@ -162,7 +162,7 @@ const Home = () => {
         >
           {Images2.map((image, i) => (
             <Image
-              key={i} // Assuming each image object has a unique ID
+              key={image} // Assuming each image object has a unique ID
               style={styles.images}
               source={{ uri: image }}
             />
