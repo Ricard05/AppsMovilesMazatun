@@ -1,20 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, TouchableOpacity, Image, TextInput } from "react-native";
+import axios from "axios";
 
 export default function Loginscreen({ navigation }) {
-  const goToLogin = () => {
-    if (email === "" || password === "") {
-      console.log("Completa los campos");
-    } else {
-      console.log("Iniciar Sesion");
-      setEmail("");
-      setPassword("");
-      navigation.navigate("TabScreen");
-    }
-  };
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const handleChangeEmail = (e) => {
     setEmail(e.value);
   };
@@ -86,7 +77,9 @@ export default function Loginscreen({ navigation }) {
               borderRadius: 60,
               marginTop: 50,
             }}
-            onPress={goToLogin}
+            onPress={() => {
+              navigation.navigate("TabScreen");
+            }}
           >
             <Text style={{ textAlign: "center", fontSize: 20 }}>Login</Text>
           </TouchableOpacity>

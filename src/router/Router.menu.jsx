@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import screens from "../screens/Screens";
 
 const Tab = createBottomTabNavigator();
@@ -37,7 +37,21 @@ export default function RouterMenu() {
           headerShown: false,
         }}
       />
-      {/* Agrega otras pantallas que desees en la pestaña inferior */}
+
+      <Tab.Screen
+        name="Chart"
+        component={screens.ChartScreen}
+        options={{
+          tabBarIcon: () => {
+            return (
+              <View style={{ alignItems: "center", justifyContent: "center" }}>
+                <FontAwesomeIcon name="phone" size={24} />
+              </View>
+            );
+          },
+          headerShown: false,
+        }}
+      />
     </Tab.Navigator>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 import {
   Image,
@@ -9,8 +9,18 @@ import {
   TextInput,
 } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import axios from "axios";
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  const [name, setName] = useState("Usuario");
+  useEffect(() => {
+    console.log("HOla");
+    axios.get("http://localhost:3000/api/user/homero").then((res) => {
+      console.log(res.data);
+      setName(res.data.username);
+    });
+  }, []);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const Images = [
@@ -43,7 +53,7 @@ const Home = () => {
 
         {/* Welcome message */}
         <Text style={{ fontSize: 25, alignSelf: "center", marginLeft: 10 }}>
-          Hi, Ricardo
+          Hi, {name}
         </Text>
 
         <FontAwesomeIcon
@@ -127,17 +137,23 @@ const Home = () => {
           {Images.flatMap((imageGroup, index) => {
             return index === currentIndex ? (
               imageGroup.map((imageSource, i) => (
-                <Image
-                  key={imageSource}
-                  style={{
-                    width: 200,
-                    height: 200,
-                    borderRadius: 10,
-                    marginTop: 10,
-                    marginRight: 10,
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("Chart");
                   }}
-                  source={{ uri: imageSource }}
-                />
+                >
+                  <Image
+                    key={imageSource}
+                    style={{
+                      width: 200,
+                      height: 200,
+                      borderRadius: 10,
+                      marginTop: 10,
+                      marginRight: 10,
+                    }}
+                    source={{ uri: imageSource }}
+                  />
+                </TouchableOpacity>
               ))
             ) : (
               <></>
